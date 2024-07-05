@@ -1,10 +1,8 @@
-//import { useState } from 'react'
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import Box from "@mui/material/Box";
 import { useColorScheme } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,7 +11,7 @@ import Select from "@mui/material/Select";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ContrastIcon from "@mui/icons-material/Contrast";
-//import useMediaQuery from '@mui/material/useMediaQuery';
+import Container from "@mui/material/Container";
 
 function ModeSelect() {
   const { mode, setMode } = useColorScheme();
@@ -33,51 +31,54 @@ function ModeSelect() {
         onChange={handleChange}
       >
         <MenuItem value="light">
-          <LightModeIcon/>   
+          <LightModeIcon />
         </MenuItem>
         <MenuItem value="dark">
-          <DarkModeIcon/>
+          <DarkModeIcon />
         </MenuItem>
         <MenuItem value="system">
-          <ContrastIcon/>
+          <ContrastIcon />
         </MenuItem>
       </Select>
     </FormControl>
   );
 }
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
-  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  // const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)')
-  // console.log('prefersDarkMode :', prefersDarkMode)
-  // console.log('prefersLightMode :', prefersLightMode)
-
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === "light" ? "dark" : "light");
-      }}
-    >
-      {mode === "light" ? "Turn dark" : "Turn light"}
-    </Button>
-  );
-}
-
 function App() {
   return (
-    <>
-      <ModeSelect />
-      <hr />
-      <ModeToggle />
-      <hr />
-      <div>Hello word</div>
-      <Typography variant="body2" component="text.secondary">
-        ABC
-      </Typography>
-      <Button variant="contained">Hello world</Button>
-    </>
+    <Container
+      disableGutters
+      maxWidth={false}
+      sx={{ height: '100vh', background: '' }}
+    >
+      <Box sx={{
+        backgroundColor: 'primary.light',
+        width: '100%',
+        height: (theme) => theme.trello.appBarHeight,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        <ModeSelect />
+      </Box>
+      <Box sx={{
+         backgroundColor: 'primary.dark',
+         width: '100%',
+         height:(theme) => theme.trello.boardBarHeight,
+         display: 'flex',
+         alignItems: 'center',
+      }}>
+        Board Bar
+      </Box>
+      <Box sx={{
+         backgroundColor: 'primary.main',
+         width: '100%',
+         height: (theme) => `calc(100vh - ${theme.trello.appBarHeight} - ${theme.trello.boardBarHeight})`,
+         display: 'flex',
+         alignItems: 'center',
+      }}>
+        Bord Content
+      </Box>
+    </Container>
   );
 }
-
 export default App;
