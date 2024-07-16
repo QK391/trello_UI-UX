@@ -33,7 +33,7 @@ function WorksPaces() {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon/>}
       >
-        Dashboard
+        Workspaces
       </Button>
       <Menu
         id="basic-menu-workspaces"
@@ -80,7 +80,7 @@ function WorksPaces() {
         </MenuItem>
       </Menu>
     </Box>
-  );
+  )
 }
 
 export default WorksPaces;

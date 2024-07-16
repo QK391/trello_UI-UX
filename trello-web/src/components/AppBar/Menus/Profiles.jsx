@@ -32,7 +32,10 @@ function Profiles() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-           <Avatar sx={{ width: 30, height: 30 }}M alt="Error"/>
+             <Avatar
+              alt="Remy Sharp"
+              src="https://scontent.fhan15-1.fna.fbcdn.net/v/t1.6435-9/116717799_2766609403627104_4257424577719615231_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=53a332&_nc_ohc=qi98NoJKqbMQ7kNvgFt4q5B&_nc_ht=scontent.fhan15-1.fna&oh=00_AYCy7fyiVlS7K5C-CIVuKbRxUp2DZpkgMvTduW9cPZJVKQ&oe=66B967FE"
+            />
           </IconButton>
         </Tooltip>
       <Menu
@@ -71,7 +74,7 @@ function Profiles() {
         </MenuItem>
       </Menu>
     </Box>
-  );
+  )
 }
 
 export default Profiles;

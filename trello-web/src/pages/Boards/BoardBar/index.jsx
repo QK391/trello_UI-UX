@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar"
 import AvatarGroup from "@mui/material/AvatarGroup"
 import { Tooltip } from "@mui/material"
 import Button from "@mui/material/Button"
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt"
 
 const MENU_STYLE = {
   color: "primary.main",
@@ -75,12 +75,21 @@ function BoardBar() {
       </Box>
 
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-      <Button variant="outlined" startIcon={<PersonAddAltIcon/>}>Invite</Button>
-        <AvatarGroup max={4} sx={{'&. .MuiAvatar-root': {
-          width: 34,
-          height: 34,
-          fontSize: 16
-        }}}>
+        <Button variant="outlined" startIcon={<PersonAddAltIcon />}>
+          Invite
+        </Button>
+        <AvatarGroup
+          max={4}
+          sx={{
+            "& .MuiAvatar-root": {
+              width: 34,
+              height: 34,
+              fontSize: 16,
+              color: 'white',
+              cursor: 'pointer',
+            },
+          }}
+        >
           <Tooltip>
             <Avatar
               alt="Remy Sharp"
