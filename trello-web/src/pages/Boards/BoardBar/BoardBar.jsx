@@ -10,6 +10,7 @@ import AvatarGroup from "@mui/material/AvatarGroup"
 import { Tooltip } from "@mui/material"
 import Button from "@mui/material/Button"
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt"
+import { capiatllizeFirstletter } from "~/ultils/formatter"
 
 const MENU_STYLE = {
   color: "primary.main",
@@ -21,7 +22,8 @@ const MENU_STYLE = {
   },
 };
 
-function BoardBar() {
+// eslint-disable-next-line react/prop-types
+function BoardBar({ board }) {
   return (
     <Box
       sx={{
@@ -41,14 +43,16 @@ function BoardBar() {
         <Chip
           sx={MENU_STYLE}
           icon={<DashboardIcon />}
-          label="Trello Work"
+          // eslint-disable-next-line react/prop-types
+          label={board?.title}
           clickable
         />
 
         <Chip
           sx={MENU_STYLE}
           icon={<BallotIcon />}
-          label="Public/private Works"
+          // eslint-disable-next-line react/prop-types
+          label={capiatllizeFirstletter (board?.type)}
           clickable
         />
 

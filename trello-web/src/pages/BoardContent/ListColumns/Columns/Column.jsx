@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
@@ -17,10 +18,13 @@ import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import Button from "@mui/material/Button";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ListCards from "./ListCards/ListCards";
+import { mapOrder } from "~/ultils/sorts";
 
-function Column() {
+
+function Column({ column }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -43,7 +47,7 @@ function Column() {
     >
       <Box
         sx={{
-          height: (theme)=> theme.trello.columnHeaderHeight,
+          height: (theme) => theme.trello.columnHeaderHeight,
           p: 2,
           display: "flex",
           alignItems: "center",
@@ -51,7 +55,7 @@ function Column() {
         }}
       >
         <Typography sx={{ fontWeight: "bold", cursor: "pointer" }}>
-          Column Title
+          {column?.title}
         </Typography>
         <Box>
           <Tooltip title="More options">
@@ -117,11 +121,11 @@ function Column() {
         </Box>
       </Box>
 
-      <ListCards/>
-      
+      <ListCards cards={orderedCards}/>
+
       <Box
         sx={{
-          height:  (theme)=> theme.trello.columnFooterHeight,
+          height: (theme) => theme.trello.columnFooterHeight,
           p: 2,
           display: "flex",
           alignItems: "center",

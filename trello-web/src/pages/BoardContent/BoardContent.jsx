@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
 import Box from "@mui/material/Box";
 import ListColumns from "./ListColumns/ListColumns";
-//import theme from "~/theme";
+import { mapOrder } from "~/ultils/sorts";
 
-function BoardContent() {
+// eslint-disable-next-line react/prop-types
+function BoardContent({ board }) {
+  const orderedColumns = mapOrder(board?.columns, board?.columnOrderIds, '_id')
   return (
     <Box
       sx={{
@@ -12,7 +15,7 @@ function BoardContent() {
         display: "flex",
       }}
     >
-      <ListColumns/>
+      <ListColumns columns= {orderedColumns}/>
     </Box>
   );
 }

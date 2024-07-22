@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import Box from "@mui/material/Box";
 import Column from "./Columns/Column";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 
-function ListColumns() {
+// eslint-disable-next-line react/prop-types
+function ListColumns({columns}) {
   return (
     <Box
       sx={{
@@ -16,8 +18,9 @@ function ListColumns() {
         "&::-webkit-scrollbar-track": { m: 2 },
       }}
     >
-      <Column />
-      <Column />
+      {columns?.map(column => 
+         <Column key={column._id} column={column}/>
+      )}
       <Box
         sx={{
           minWidth: "200px",

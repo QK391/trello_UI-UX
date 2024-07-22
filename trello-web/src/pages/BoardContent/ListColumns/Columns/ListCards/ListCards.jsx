@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import Box from "@mui/material/Box";
 import Card from "./Card/Card";
 
-function ListCards() {
+function ListCards({ cards }) {
   return (
     <Box
       sx={{
@@ -14,14 +15,12 @@ function ListCards() {
         maxHeight: (theme) => `calc(${
           theme.trello.BoardContentHeight
         } - ${theme.spacing(5)} -
-              ${theme.trello.columnFooterHeight} - ${theme.trello.columnHeaderHeight})`,
+              ${theme.trello.columnFooterHeight} - ${
+          theme.trello.columnHeaderHeight
+        })`,
       }}
     >
-        <Card/>
-        <Card temporaryHideMedia/>
-        <Card temporaryHideMedia/>
-        <Card temporaryHideMedia/>
-
+      {cards?.map(card => <Card key={card._id} card={card}/>)}
     </Box>
   );
 }
