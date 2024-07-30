@@ -3,10 +3,13 @@ import Box from "@mui/material/Box";
 import Column from "./Columns/Column";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
+
 
 // eslint-disable-next-line react/prop-types
 function ListColumns({columns}) {
   return (
+    <SortableContext items={columns?.map(c => c._id)} strategy={horizontalListSortingStrategy}>
     <Box
       sx={{
         bgcolor: "inherit",
@@ -14,6 +17,7 @@ function ListColumns({columns}) {
         height: "100%",
         display: "flex",
         overflowX: "auto",
+        marginTop: "10px",
         overflowY: "hidden",
         "&::-webkit-scrollbar-track": { m: 2 },
       }}
@@ -45,6 +49,7 @@ function ListColumns({columns}) {
         </Button>
       </Box>
     </Box>
+    </SortableContext>
   );
 }
 
