@@ -151,7 +151,7 @@ export const mockData = {
           {
             _id: "card-id-11",
             boardId: "board-id-01",
-            columnId: "column-id-02",
+            columnId: "column-id-03",
             title: "Title of card 11",
             description: null,
             cover: null,
@@ -162,7 +162,7 @@ export const mockData = {
           {
             _id: "card-id-12",
             boardId: "board-id-01",
-            columnId: "column-id-02",
+            columnId: "column-id-03",
             title: "Title of card 12",
             description: null,
             cover: null,
@@ -173,7 +173,7 @@ export const mockData = {
           {
             _id: "card-id-13",
             boardId: "board-id-01",
-            columnId: "column-id-02",
+            columnId: "column-id-03",
             title: "Title of card 13",
             description: null,
             cover: null,
