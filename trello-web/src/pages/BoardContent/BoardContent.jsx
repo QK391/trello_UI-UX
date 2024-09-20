@@ -12,17 +12,17 @@ import {
   DragOverlay,
   defaultDropAnimationSideEffects,
   closestCorners,
-  closestCenter,
   pointerWithin,
-  rectIntersection,
+  //rectIntersection,
   getFirstCollision,
 } from "@dnd-kit/core";
 import Column from "./ListColumns/Columns/Column";
 import Card from "./ListColumns/Columns/ListCards/Card/Card";
 import { arrayMove } from "@dnd-kit/sortable";
-//import { cloneDeep } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
+import { generatePlacehoderCard } from "~/ultils/formatter";
 
-const ACTIVE_DRAG_ITEM_TYPE = {
+const ACTIVE_DRAG_ITEM_TYPE = { 
   COLUMN: "ACTIVE_DRAG_ITEM_TYPE_COLUMN",
   CARD: "ACTIVE_DRAG_ITEM_TYPE_CARD",
 };
@@ -90,7 +90,7 @@ function BoardContent({ board }) {
       const nextActiverColumn = nextColumns.find(
         (column) => column._id === activeColumn._id
       );
-      const nextoverColumn = nextColumns.find(
+      const nextOverColumn = nextColumns.find(
         (column) => column._id === overColumn._id
       );
 
@@ -98,28 +98,34 @@ function BoardContent({ board }) {
         nextActiverColumn.cards = nextActiverColumn.cards.filter(
           (card) => card._id !== activeDringCardId
         );
+
+        if(isEmpty(nextActiverColumn.cards)){
+          nextActiverColumn.cards = [generatePlacehoderCard(nextActiverColumn)];
+        }
         //Cap nhat lai mang
         nextActiverColumn.cardOderIds = nextActiverColumn.cards.map(
           (card) => card._id
         );
       }
-      if (nextoverColumn) {
-        nextoverColumn.cards = nextoverColumn.cards.filter(
+      if (nextOverColumn) {
+        nextOverColumn.cards = nextOverColumn.cards.filter(
           (card) => card._id !== activeDringCardId
         );
         const rebuild_activeDringCardData = {
           ...activeDringCardData,
-          columnId: nextoverColumn._id,
+          columnId: nextOverColumn._id,
         };
-        nextoverColumn.cards = nextoverColumn.cards.toSpliced(
+        nextOverColumn.cards = nextOverColumn.cards.toSpliced(
           newCardIndex,
           0,
           rebuild_activeDringCardData
         );
-        nextoverColumn.cardOderIds = nextoverColumn.cards.map(
+        nextOverColumn.cards = nextOverColumn.cards.filter(card => !card.FE_PlacehoderCard)
+        nextOverColumn.cardOderIds = nextOverColumn.cards.map(
           (card) => card._id
         );
       }
+      console.log('nextOverColumn:', nextColumns);
       return nextColumns;
     });
   };
@@ -265,10 +271,13 @@ function BoardContent({ board }) {
         return closestCorners({ ...args });
       }
       const poiterIntersections = pointerWithin(args);
-      const intersections = !!poiterIntersections?.length
-        ? poiterIntersections
-        : rectIntersection(args);
-      let overId = getFirstCollision(intersections, "id");
+      console.log('poiterIntersections: ', poiterIntersections)
+      if (!poiterIntersections?.length) return
+
+      // const intersections = !!poiterIntersections?.length
+      //   ? poiterIntersections
+      //   : rectIntersection(args);
+      let overId = getFirstCollision(poiterIntersections, "id");
 
       if (overId) {
         const checkColumn = orderebColumns.find(
@@ -276,7 +285,7 @@ function BoardContent({ board }) {
         );
         if (checkColumn) {
          // console.log('overId before:', overId)
-          overId = closestCenter({
+          overId = closestCorners({
             ...args,
             droppableContainers: args.droppableContainers.filter(
               (container) => {
