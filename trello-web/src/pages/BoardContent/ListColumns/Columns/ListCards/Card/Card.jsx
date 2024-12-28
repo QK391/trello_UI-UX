@@ -14,7 +14,7 @@ import { CSS } from "@dnd-kit/utilities";
 // eslint-disable-next-line react/prop-types
 function Card({ card }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: card._id, data: { ...card } });
+    useSortable({ id: card?._id, data: {...card} });
 
   const dndCardStyle = {
     touchAction: "none",
@@ -22,8 +22,6 @@ function Card({ card }) {
     transition,
     opacity: isDragging ? 0.5 : undefined,
     border: isDragging ? '1px solid #2ecc71' : undefined,
-
-
   };
   const showuldShowCardActions = () => {
     return (

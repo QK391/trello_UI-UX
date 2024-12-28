@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Box from "@mui/material/Box";
 import ListColumns from "./ListColumns/ListColumns";
 import { mapOrder } from "~/ultils/sorts";
@@ -29,7 +28,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
 
 // eslint-disable-next-line react/prop-types
 function BoardContent({ board }) {
-  // const orderedColumns = mapOrder(board?.columns, board?.columnOrderIds, "_id");
+   const orderedColumns = mapOrder(board?.columns, board?.columnOrderIds, "_id");
   // const pointerSensor = useSensor(PointerSensor, {
   //   activationConstraint: { distance: 10 },
   // });
